@@ -1,24 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {useJokeApi} from "./api/getJoke";
 
 function App() {
+  const { data, getRandomJoke, loading, error } = useJokeApi()
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className={"mainWrapper"}>
+        <h1>Joke generator 📱</h1>
+        <button onClick={getRandomJoke} className={'toggleJokeButton'}>Toggle joke</button>
+        <div className={'jokeContainer'}>
+          <h3>{data.setup}</h3>
+          <h3 style={{ marginTop: 0 }}>- {data.delivery}</h3>
+        </div>
+      </div>
     </div>
   );
 }
