@@ -14,7 +14,7 @@ export const useJokeApi = () => {
     try {
       setLoading(true)
       setError(null)
-      const res = await fetch('https://v2.jokeapi.dev/joke/Programming')
+      const res = await fetch('https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit')
       const data = await res.json()
       const joke = {
         delivery: data.joke ? data.joke : data.delivery,
@@ -36,7 +36,6 @@ export const useJokeApi = () => {
   }, [getRandomJoke])
 
   return {
-    getRandomJoke,
     data,
     loading,
     error
