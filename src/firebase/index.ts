@@ -12,10 +12,6 @@ export const db = getFirestore(firebaseApp)
 export const auth = getAuth(firebaseApp)
 const messaging = getMessaging(firebaseApp)
 
-export const fetchToken = () => {
-  return getToken(messaging, {vapidKey: process.env.REACT_APP_VAPID}).then((console.log))
-}
-
 enableIndexedDbPersistence(db)
   .catch((err) => {
     console.log('Failed to enable persistance: ', err)
@@ -24,3 +20,8 @@ enableIndexedDbPersistence(db)
       // features required to enable persistence
     }
   })
+
+export const fetchToken = () => {
+  return getToken(messaging, {vapidKey: process.env.REACT_APP_VAPID}).then((console.log))
+}
+
