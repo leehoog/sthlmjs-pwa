@@ -1,9 +1,9 @@
 import React, {FC, Ref, useEffect, useRef} from 'react';
 import * as firebaseui from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
-import {getAuth, onAuthStateChanged, User} from 'firebase/auth';
+import {onAuthStateChanged, User} from 'firebase/auth';
 import { GoogleAuthProvider } from 'firebase/auth'
-import {firebaseApp} from "../firebase";
+import {auth} from "../firebase";
 
 interface Props {
   setUser: (user: User | null) => void,
@@ -14,7 +14,6 @@ export const LoginPage: FC<Props> = ({ setUser, user }) => {
   const elementRef = useRef<Element>(null)
 
   useEffect(() => {
-    const auth = getAuth(firebaseApp)
 
     const uiConfig = {
       signInOptions: [

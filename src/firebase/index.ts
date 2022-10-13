@@ -2,13 +2,15 @@ import { initializeApp } from 'firebase/app';
 import { getMessaging, getToken } from "firebase/messaging";
 import { enableIndexedDbPersistence } from "firebase/firestore";
 import { getFirestore } from 'firebase/firestore'
+import {getAuth} from "firebase/auth";
 
 const firebaseConfig = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG as string)
 
-export const firebaseApp = initializeApp(firebaseConfig)
-const messaging = getMessaging(firebaseApp)
+const firebaseApp = initializeApp(firebaseConfig)
 
 export const db = getFirestore(firebaseApp)
+export const auth = getAuth(firebaseApp)
+const messaging = getMessaging(firebaseApp)
 
 export const fetchToken = () => {
   return getToken(messaging, {vapidKey: process.env.REACT_APP_VAPID}).then((console.log))
