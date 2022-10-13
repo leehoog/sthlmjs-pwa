@@ -1,24 +1,23 @@
 import React, {useEffect, useState} from 'react';
-import {HomePage} from "./pages";
 import { User } from 'firebase/auth';
 import {fetchToken} from "./firebase";
 import {LoginPage} from "./pages/login";
+import {HomePage} from "./pages";
 
 
 function App() {
-  const [user, setUser] = useState<User | null>(null);
-  const [isTokenFound, setTokenFound] = useState(false);
+  const [user, setAuth] = useState<User | null>(null)
 
   useEffect(() => {
-    !isTokenFound && fetchToken(setTokenFound);
-  }, [isTokenFound])
+    fetchToken()
+  }, [])
 
   return (
     <div className="App">
       {
         user ?
-          <HomePage />
-          : <LoginPage setUser={setUser} user={user}/>
+        <HomePage />
+          : <LoginPage setUser={setAuth} user={user}/>
       }
     </div>
   );

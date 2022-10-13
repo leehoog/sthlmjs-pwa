@@ -10,7 +10,6 @@ interface Props {
   user: User | null
 }
 
-
 export const LoginPage: FC<Props> = ({ setUser, user }) => {
   const elementRef = useRef<Element>(null);
 
@@ -43,5 +42,5 @@ export const LoginPage: FC<Props> = ({ setUser, user }) => {
     };
   }, [user, setUser]);
 
-  return <div className={'#firebase-ui'} ref={elementRef as Ref<any>} />;
+  return <div ref={elementRef as Ref<any>} />;
 }
