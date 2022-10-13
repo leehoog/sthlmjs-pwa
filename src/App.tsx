@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import { User } from 'firebase/auth';
 import {fetchToken} from "./firebase";
 import {LoginPage} from "./pages/login";
 import {HomePage} from "./pages";
 
 
 function App() {
-  const [user, setAuth] = useState<User | null>(null)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   useEffect(() => {
     fetchToken()
@@ -15,9 +14,9 @@ function App() {
   return (
     <div className="App">
       {
-        user ?
+        isLoggedIn ?
         <HomePage />
-          : <LoginPage setUser={setAuth} user={user}/>
+          : <LoginPage setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>
       }
     </div>
   );

@@ -1,16 +1,16 @@
 import React, {FC, Ref, useEffect, useRef} from 'react';
 import * as firebaseui from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
-import {onAuthStateChanged, User} from 'firebase/auth';
+import {onAuthStateChanged} from 'firebase/auth';
 import { GoogleAuthProvider } from 'firebase/auth'
 import {auth} from "../firebase";
 
 interface Props {
-  setUser: (user: User | null) => void,
-  user: User | null
+  setIsLoggedIn: (value: boolean) => void,
+  isLoggedIn: boolean
 }
 
-export const LoginPage: FC<Props> = ({ setUser, user }) => {
+export const LoginPage: FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
   const elementRef = useRef<Element>(null)
 
   useEffect(() => {
@@ -28,9 +28,9 @@ export const LoginPage: FC<Props> = ({ setUser, user }) => {
       firebaseUiWidget.reset()
 
     const unregisterAuthObserver = onAuthStateChanged(auth, (authUser) => {
-      if (!authUser && user)
+      if (!authUser && isLoggedIn)
         firebaseUiWidget.reset()
-      setUser(authUser)
+      setIsLoggedIn(!!authUser)
     })
 
     firebaseUiWidget.start(elementRef.current as Element, uiConfig)
@@ -39,7 +39,7 @@ export const LoginPage: FC<Props> = ({ setUser, user }) => {
       unregisterAuthObserver()
       firebaseUiWidget.reset()
     };
-  }, [user, setUser])
+  }, [isLoggedIn, setIsLoggedIn])
 
   return (
     <div>
