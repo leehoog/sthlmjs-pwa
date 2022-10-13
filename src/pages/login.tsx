@@ -42,5 +42,10 @@ export const LoginPage: FC<Props> = ({ setUser, user }) => {
     };
   }, [user, setUser])
 
-  return <div ref={elementRef as Ref<any>} />;
+  return (
+    <div>
+      <h3>Login</h3>
+      <div ref={elementRef as Ref<any>} />
+    </div>
+  )
 }

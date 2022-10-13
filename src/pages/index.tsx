@@ -13,10 +13,10 @@ export const HomePage = () => {
   return (
     <div className="App">
       <h1>Home</h1>
-      <button onClick={getPosts}>Get posts</button>
+      <button onClick={getPosts} className={'getPostsButton'}>Get posts</button>
       {
         posts.map(post =>
-          <div key={post.id}>
+          <div key={post.id} className={'postItem'}>
             <h3>{post.title}</h3>
             <p>{post.description}</p>
           </div>
