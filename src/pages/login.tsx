@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const LoginPage: FC<Props> = ({ setUser, user }) => {
-  const elementRef = useRef<Element>(null);
+  const elementRef = useRef<Element>(null)
 
   useEffect(() => {
     const auth = getAuth(firebaseApp)
@@ -24,23 +24,23 @@ export const LoginPage: FC<Props> = ({ setUser, user }) => {
       signInSuccessUrl: '/',
     }
 
-    const firebaseUiWidget = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(auth);
+    const firebaseUiWidget = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(auth)
     if (uiConfig.signInFlow === 'popup')
-      firebaseUiWidget.reset();
+      firebaseUiWidget.reset()
 
     const unregisterAuthObserver = onAuthStateChanged(auth, (authUser) => {
       if (!authUser && user)
-        firebaseUiWidget.reset();
-      setUser(authUser);
-    });
+        firebaseUiWidget.reset()
+      setUser(authUser)
+    })
 
-    firebaseUiWidget.start(elementRef.current as Element, uiConfig);
+    firebaseUiWidget.start(elementRef.current as Element, uiConfig)
 
     return () => {
-      unregisterAuthObserver();
-      firebaseUiWidget.reset();
+      unregisterAuthObserver()
+      firebaseUiWidget.reset()
     };
-  }, [user, setUser]);
+  }, [user, setUser])
 
   return <div ref={elementRef as Ref<any>} />;
 }
